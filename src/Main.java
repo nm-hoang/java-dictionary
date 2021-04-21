@@ -1,11 +1,15 @@
 import java.util.Scanner;
 
 public class Main {
+	private static String pathSlangOriginal = "slang.txt";
+	private static String pathHistory = "history.txt";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Dictionary dic = new Dictionary();
-		dic.InitialDictionary();
+		Dictionary history = new Dictionary();
+		FileIO file = new FileIO();
+		dic.InitialDictionary(pathSlangOriginal);
 		Scanner scanner = new Scanner(System.in);
 		while(true) {
 			System.out.println("1: Find word in slang word");
@@ -33,6 +37,11 @@ public class Main {
 					String word = scanner.nextLine();
 					System.out.print("Slang word: ");
 					dic.ShowSlangWordByDefination(word);
+					break;
+				}
+				case "3":{
+//					file.WriteFile(pathHistory, dic.getDic());
+					file.WriteFileHistory(pathHistory, "#1`NumberOne");
 					break;
 				}
 			}

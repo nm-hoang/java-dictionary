@@ -6,12 +6,19 @@ import java.util.Map;
 
 public class Dictionary {
 	private Map<String, String> dic;
+	public Map<String, String> getDic(){
+		return this.dic;
+	}
+	public void setDic(Map<String, String> dic) {
+		this.dic = dic;
+		
+	}
 	public Dictionary(){
 		this.dic = new HashMap<String, String>();
 	}
-	public void InitialDictionary() {
+	public void InitialDictionary(String path) {
 		FileIO file = new FileIO();
-		dic = file.ReadFile();
+		dic = file.ReadFile(path);
 	}
 	public void PrintDictionary() {
 		dic.entrySet().forEach(entry -> {
@@ -19,7 +26,6 @@ public class Dictionary {
 		});
 	}
 	public String ShowDefinationBySlangWord(String word) {		
-		
 		return dic.get(word.toUpperCase());
 	}
 	public void ShowSlangWordByDefination(String def) {
@@ -34,7 +40,7 @@ public class Dictionary {
 		    	sl.add(entry.getKey());
 		    }
 		});
-		System.out.print("Slang word: ")
+		System.out.print("Slang word: ");
 		for(int i=0; i<sl.size();i++) {
 			System.out.print(sl.get(i) + " - ");
 		}
