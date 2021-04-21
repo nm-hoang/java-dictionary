@@ -8,25 +8,31 @@ public class Main {
 		dic.InitialDictionary();
 		Scanner scanner = new Scanner(System.in);
 		while(true) {
-			System.out.println("1: Chức năng tìm kiếm theo slang word");
-			System.out.println("2: Chức năng tìm kiếm theo definition, hiển thị ra tất cả các slang words mà trong defintion có chứa keyword gõ vào.");
-			System.out.println("3: Chức năng hiển thị history, danh sách các slang word đã tìm kiếm.Chức năng hiển thị history, danh sách các slang word đã tìm kiếm.");
-			System.out.println("4: Chức năng add 1 slang words mới. Nếu slang words trùng thì thông báo cho người\r\n"
-					+ "dùng, confirm có overwrite hay duplicate ra 1 slang word mới");
-			System.out.println("5: Chức năng edit 1 slang word");
-			System.out.println("6: Chức năng delete 1 slang word. Confirm trước khi xoá.");
-			System.out.println("7: Chức năng reset danh sách slang words gốc");
-			System.out.println("8: Chức năng random 1 slang word (On this day slang word)." );
-			System.out.println("9: Chức năng đố vui, chương trình hiển thị 1 random slang word, với 4 đáp án cho\r\n"
-					+ "người dùng chọn");
-			System.out.println("10: Chức năng đố vui, chương trình hiển thị 1 definition, với 4 slang words đáp án cho\r\n"
-					+ "người dùng chọn");
+			System.out.println("1: Find word in slang word");
+			System.out.println("2: Find slang word by defination, show another slang word that contain keyword.");
+			System.out.println("3: Show history, list slang word was searched");
+			System.out.println("4: Add a slangword. If a slang word is already exist, notice to user want to confirm or duplicate to a new slangword");
+			System.out.println("5: Edit 1 slang word");
+			System.out.println("6: Delete 1 slang word. Confirm before delete");
+			System.out.println("7: Reset original list slang word");
+			System.out.println("8: Random 1 slang word (On this day slang word)." );
+			System.out.println("9: Show 1 random slang word. User pick 1 in 4 option");
+			System.out.println("10: Show 1 randow defination. User pick 1 in 4 option of slang words");
 			System.out.print("Choose: ");
 			String line = scanner.nextLine();
 			switch(line) {
 				case "1":{
-					System.out.print("Nhập từ tìm kiếm");
-					dic.FindWord(line)
+					System.out.print("Enter a slang word: ");
+					String word = scanner.nextLine();
+					System.out.print("Defination: ");
+					System.out.println(dic.ShowDefinationBySlangWord(word));
+					break;
+				}
+				case "2": {
+					System.out.print("Enter a defination: ");
+					String word = scanner.nextLine();
+					System.out.print("Slang word: ");
+					dic.ShowSlangWordByDefination(word);
 					break;
 				}
 			}

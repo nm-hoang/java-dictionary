@@ -39,7 +39,7 @@ public class FileIO {
 		      Scanner myReader = new Scanner(myObj);
 		      while (myReader.hasNextLine()) {
 		        String data = myReader.nextLine();
-		        if(data.contains("Hel")) {
+		        if(data.contains("`")) {
 		        	String[] parts = data.split("`");
 		        	englSpan.put(parts[0], parts[1]);		        			        	
 		        }
