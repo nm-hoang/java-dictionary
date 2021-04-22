@@ -8,6 +8,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		Dictionary dic = new Dictionary();
 		Dictionary history = new Dictionary();
+		
 		FileIO file = new FileIO();
 		dic.InitialDictionary(pathSlangOriginal);
 		Scanner scanner = new Scanner(System.in);
@@ -35,8 +36,7 @@ public class Main {
 				case "2": {
 					System.out.print("Enter a defination: ");
 					String word = scanner.nextLine();
-					System.out.print("Slang word: ");
-					dic.ShowSlangWordByDefination(word);
+					dic.printListSlangWord(dic.ShowSlangWordByDefination(word));
 					break;
 				}
 				case "3":{

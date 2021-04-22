@@ -31,7 +31,6 @@ public class FileIO {
 	}
 	public Map<String, String> ReadFile(String path) {
 		Map <String, String> englSpan = new HashMap<String, String>();
-		Dictionary dic = new Dictionary();
 		try {
 		      File myObj = new File(path);
 		      Scanner myReader = new Scanner(myObj);
@@ -41,7 +40,6 @@ public class FileIO {
 		        	String[] parts = data.split("`");
 		        	englSpan.put(parts[0], parts[1]);		        			        	
 		        }
-
 		      }
 		      myReader.close();
 		    } catch (FileNotFoundException e) {
@@ -70,37 +68,58 @@ public class FileIO {
 		    }
 		
 	}
-	public void WriteFileHistory(String path, String word) {
+	public void WriteFileHistory(String path, String slangword) {
+//		try {
+//		      FileWriter myWriter = new FileWriter(path);
+////		      Dictionary historyDic = new Dictionary();
+//		      List<String> historyDic = new ArrayList<>();
+//		      historyDic.add(word);
+//		      
+//		      //Read file
+//		      System.out.println(path);
+//		      try {
+//			      File myObj = new File(path);
+//			      Scanner myReader = new Scanner(myObj);
+//			      while (myReader.hasNextLine()) {
+//			    	  String data = myReader.nextLine();
+//			    	  System.out.println(data);
+////			        historyDic.add(myReader.nextLine());
+//			      }
+//			      myReader.close();
+//			    } catch (FileNotFoundException e) {
+//			      System.out.println("An error occurred.");
+//			      e.printStackTrace();
+//			    }
+//		    
+//////		      Write file
+////		      for(int i=0;i<historyDic.size();i++) {
+////		    	  System.out.print(historyDic.get(i));
+////		    	  myWriter.write(historyDic.get(i) + "\n");
+////		      }
+////		      
+//		      myWriter.close();
+////		      System.out.println("Successfully wrote to the file.");
+//		    } catch (IOException e) {
+//		      System.out.println("An error occurred.");
+//		      e.printStackTrace();
+//		    }
+		
+		//Read File
 		try {
-		      FileWriter myWriter = new FileWriter(path);
-//		      Dictionary historyDic = new Dictionary();
-		      List<String> historyDic = new ArrayList<>();
-		      historyDic.add(word);
-		      
-		      //Read file
-		      try {
-			      File myObj = new File(path);
-			      Scanner myReader = new Scanner(myObj);
-			      while (myReader.hasNextLine()) {
-			    	  String data = myReader.nextLine();
-//			        historyDic.add(myReader.nextLine());
-			      }
-			      myReader.close();
-			    } catch (FileNotFoundException e) {
-			      System.out.println("An error occurred.");
-			      e.printStackTrace();
-			    }
-		    
-		      for(int i=0;i<historyDic.size();i++) {
-		    	  System.out.print(historyDic.get(i));
-//		    	  myWriter.write(historyDic.get(i) + "\n");
+			List<String> historyDic = new ArrayList<>();
+		     File myObj = new File(path);
+		     Scanner myReader = new Scanner(myObj);
+		     while (myReader.hasNextLine()) {
+		       String data = myReader.nextLine();
+		       historyDic.add(data);	        			        	
 		      }
-		      
-		      myWriter.close();
-//		      System.out.println("Successfully wrote to the file.");
-		    } catch (IOException e) {
+		      	myReader.close();
+		    } catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
+		
+		//Write File
+//		for
 	}
 }

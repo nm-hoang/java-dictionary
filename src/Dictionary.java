@@ -28,22 +28,21 @@ public class Dictionary {
 	public String ShowDefinationBySlangWord(String word) {		
 		return dic.get(word.toUpperCase());
 	}
-	public void ShowSlangWordByDefination(String def) {
-//		 for (Entry<String, String> entry : dic.entrySet()) {
-//	            if (entry.getValue().equals("c")) {
-//	                System.out.println(entry.getKey());
-//	            }
-//	        }
+	public List<String> ShowSlangWordByDefination(String def) {
 		List<String> sl = new ArrayList<>();
 		dic.entrySet().forEach(entry -> {
 		    if(entry.getValue().toLowerCase().equals(def.toLowerCase())) {
 		    	sl.add(entry.getKey());
 		    }
 		});
+	
+		return sl;
+	}
+	
+	public void printListSlangWord(List<String> slangword) {
 		System.out.print("Slang word: ");
-		for(int i=0; i<sl.size();i++) {
-			System.out.print(sl.get(i) + " - ");
+		for(int i=0; i<slangword.size(); i++) {
+			System.out.print(slangword.get(i));
 		}
-		
 	}
 }
