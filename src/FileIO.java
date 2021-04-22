@@ -1,7 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class FileIO {
+	private static String pathSlangOriginal = "slang.txt";
+	private static String pathHistory = "history.txt";
 
 
 	public String GetLastKey(Map<String, String> englSpan) {
@@ -29,10 +33,10 @@ public class FileIO {
 
 		return lastKey;
 	}
-	public Map<String, String> ReadFile(String path) {
+	public Map<String, String> ReadFileSlang() {
 		Map <String, String> englSpan = new HashMap<String, String>();
 		try {
-		      File myObj = new File(path);
+		      File myObj = new File(pathSlangOriginal);
 		      Scanner myReader = new Scanner(myObj);
 		      while (myReader.hasNextLine()) {
 		        String data = myReader.nextLine();
@@ -48,78 +52,60 @@ public class FileIO {
 		    }
 		return englSpan;
 	}
-	public void WriteFile(String path, Map<String, String> dic) {
+	public void WriteFileHistory(List<String> slangword, String def) {
+
+		List<String> historyDic = new ArrayList<>();
+		FileWriter myWriter;
 		try {
-		      FileWriter myWriter = new FileWriter(path);
-		      dic.entrySet().forEach(entry -> {
-		    	  	 try {
-		    	  		 System.out.println(entry.getKey() + "`" + entry.getValue() +"\n");
-						myWriter.write(entry.getKey() + "`" + entry.getValue() +"\n");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				});
-		      myWriter.close();
-//		      System.out.println("Successfully wrote to the file.");
-		    } catch (IOException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
+			
+			try {
+			     File myObj = new File(pathHistory);
+			     Scanner myReader = new Scanner(myObj);
+			     while (myReader.hasNextLine()) {
+			       String data = myReader.nextLine();
+			       historyDic.add(data);	        			        	
+			      }
+			      	myReader.close();
+			    } catch (FileNotFoundException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
+			
+			for(int i=0; i<slangword.size(); i++) {
+				historyDic.add(slangword + "`" + def);
+			}
+			
+			//Write File
+			myWriter = new FileWriter(pathHistory);
+			 PrintWriter pw = new PrintWriter(new FileOutputStream(pathHistory));
+
+			    for(int i=0; i<historyDic.size(); i++) {
+			    	pw.println(historyDic.get(i) + "`" + def);			    	
+			    }
+			    pw.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
-	public void WriteFileHistory(String path, String slangword) {
-//		try {
-//		      FileWriter myWriter = new FileWriter(path);
-////		      Dictionary historyDic = new Dictionary();
-//		      List<String> historyDic = new ArrayList<>();
-//		      historyDic.add(word);
-//		      
-//		      //Read file
-//		      System.out.println(path);
-//		      try {
-//			      File myObj = new File(path);
-//			      Scanner myReader = new Scanner(myObj);
-//			      while (myReader.hasNextLine()) {
-//			    	  String data = myReader.nextLine();
-//			    	  System.out.println(data);
-////			        historyDic.add(myReader.nextLine());
-//			      }
-//			      myReader.close();
-//			    } catch (FileNotFoundException e) {
-//			      System.out.println("An error occurred.");
-//			      e.printStackTrace();
-//			    }
-//		    
-//////		      Write file
-////		      for(int i=0;i<historyDic.size();i++) {
-////		    	  System.out.print(historyDic.get(i));
-////		    	  myWriter.write(historyDic.get(i) + "\n");
-////		      }
-////		      
-//		      myWriter.close();
-////		      System.out.println("Successfully wrote to the file.");
-//		    } catch (IOException e) {
-//		      System.out.println("An error occurred.");
-//		      e.printStackTrace();
-//		    }
-		
-		//Read File
+	public void ReadFileHistory() {
+		List<String> historyDic = new ArrayList<>();
+		System.out.println("History: ");
 		try {
-			List<String> historyDic = new ArrayList<>();
-		     File myObj = new File(path);
+		     File myObj = new File(pathHistory);
 		     Scanner myReader = new Scanner(myObj);
 		     while (myReader.hasNextLine()) {
 		       String data = myReader.nextLine();
 		       historyDic.add(data);	        			        	
 		      }
 		      	myReader.close();
+		      	for(int i=0; i<historyDic.size(); i++) {
+		      		System.out.println(historyDic.get(i));
+		      	}
 		    } catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
-		
-		//Write File
-//		for
 	}
 }

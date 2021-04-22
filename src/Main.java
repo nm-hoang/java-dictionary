@@ -1,8 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-	private static String pathSlangOriginal = "slang.txt";
-	private static String pathHistory = "history.txt";
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -10,10 +9,10 @@ public class Main {
 		Dictionary history = new Dictionary();
 		
 		FileIO file = new FileIO();
-		dic.InitialDictionary(pathSlangOriginal);
+		dic.InitialDictionary();
 		Scanner scanner = new Scanner(System.in);
 		while(true) {
-			System.out.println("1: Find word in slang word");
+			System.out.println("\n\n1: Find word in slang word");
 			System.out.println("2: Find slang word by defination, show another slang word that contain keyword.");
 			System.out.println("3: Show history, list slang word was searched");
 			System.out.println("4: Add a slangword. If a slang word is already exist, notice to user want to confirm or duplicate to a new slangword");
@@ -40,8 +39,7 @@ public class Main {
 					break;
 				}
 				case "3":{
-//					file.WriteFile(pathHistory, dic.getDic());
-					file.WriteFileHistory(pathHistory, "#1`NumberOne");
+					file.ReadFileHistory();
 					break;
 				}
 			}
