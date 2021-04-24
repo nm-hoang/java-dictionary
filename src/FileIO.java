@@ -13,9 +13,9 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class FileIO {
-	private static String pathSlangOriginal = "slang.txt";
+	private static String pathSlangOriginal = "slang-origin.txt";
 	private static String pathHistory = "history.txt";
-
+	private static String pathSlangUsed = "slang-used.txt";
 
 	public String GetLastKey(Map<String, String> englSpan) {
 		String lastKey = new String();
@@ -36,7 +36,7 @@ public class FileIO {
 	public Map<String, String> ReadFileSlang() {
 		Map <String, String> englSpan = new HashMap<String, String>();
 		try {
-		      File myObj = new File(pathSlangOriginal);
+		      File myObj = new File(pathSlangUsed);
 		      Scanner myReader = new Scanner(myObj);
 		      while (myReader.hasNextLine()) {
 		        String data = myReader.nextLine();
@@ -52,14 +52,14 @@ public class FileIO {
 		    }
 		return englSpan;
 	}
-	public void WriteFileHistory(List<String> slangword, String def) {
+	public void WriteFile(List<String> slangword, String path) {
 
 		List<String> historyDic = new ArrayList<>();
 		FileWriter myWriter;
 		try {
 			
 			try {
-			     File myObj = new File(pathHistory);
+			     File myObj = new File(path);
 			     Scanner myReader = new Scanner(myObj);
 			     while (myReader.hasNextLine()) {
 			       String data = myReader.nextLine();
@@ -71,18 +71,21 @@ public class FileIO {
 			      e.printStackTrace();
 			    }
 			
+			Dictionary dic = new Dictionary();
+			dic.InitialDictionary();
 			for(int i=0; i<slangword.size(); i++) {
-				historyDic.add(slangword + "`" + def);
+				String sw = slangword.get(i).toString().replaceAll("[\\[\\]\\(\\)]", "");
+				historyDic.add( sw + "`" + dic.getDic().get(sw));
 			}
 			
 			//Write File
-			myWriter = new FileWriter(pathHistory);
-			 PrintWriter pw = new PrintWriter(new FileOutputStream(pathHistory));
-
+			myWriter = new FileWriter(path);
+			 PrintWriter pw = new PrintWriter(new FileOutputStream(path));
 			    for(int i=0; i<historyDic.size(); i++) {
-			    	pw.println(historyDic.get(i) + "`" + def);			    	
+			    	pw.println(historyDic.get(i));			    	
 			    }
 			    pw.close();
+			    System.out.println("Done!");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

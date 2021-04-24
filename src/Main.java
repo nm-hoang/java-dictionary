@@ -42,6 +42,14 @@ public class Main {
 					file.ReadFileHistory();
 					break;
 				}
+				case "4":{
+					dic.AddSlangWord();
+					break;
+				}
+				case "0":{
+					dic.PrintDictionary();
+					break;
+				}
 			}
 		}
 	}
