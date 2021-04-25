@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,7 +142,6 @@ public class Dictionary {
 		return listDic;
 	}
 	public void DeleteSlangWord() {
-
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Enter a slang word you want to delete: ");
 		String sl = scanner.nextLine().toUpperCase();
@@ -173,11 +173,33 @@ public class Dictionary {
 		System.out.println("Random: " + random + "\nDefination: " + dic.get(random));
 	}
 	public void ChooseRightDef() {
-		String randowSl = this.RandomSlangWord();
-		String rightAnswer = dic.get(randowSl);
-		ArrayList<String> def = new ArrayList<>();
-		while(def.size() < 4){
-			
+		String SlQuestion = this.RandomSlangWord();
+		ArrayList<String> listSl = new ArrayList<>();
+		listSl.add(SlQuestion);
+		while(listSl.size() < 4){
+			String random = this.RandomSlangWord();
+			if(random != SlQuestion) {
+				listSl.add(random);
+			}
 		}
+		System.out.println("Slang word: " + SlQuestion + "def: "+dic.get(SlQuestion));
+		Collections.shuffle(listSl);
+		System.out.println("A. " + dic.get(listSl.get(0)));
+		System.out.println("B. " + dic.get(listSl.get(1)));
+		System.out.println("C. " + dic.get(listSl.get(2)));
+		System.out.println("D. " + dic.get(listSl.get(3)));
+		
+		char rightAnswer = (char)(65+listSl.indexOf(SlQuestion));
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Your answer: ");
+		String chooseAnswer = scanner.nextLine().toUpperCase();
+		
+		if(chooseAnswer.charAt(0) == rightAnswer ) {
+			System.out.println("Correct answer!");
+		}
+		else {
+			System.out.println("Wrong answer! The correct answer is " + rightAnswer);
+		}
+	
 	}
 }

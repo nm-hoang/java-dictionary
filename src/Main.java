@@ -64,6 +64,10 @@ public class Main {
 					dic.ShowRandomSlangWord();
 					break;
 				}
+				case "9":{
+					dic.ChooseRightDef();
+					break;
+				}
 				case "0": {
 					break;
 				}
