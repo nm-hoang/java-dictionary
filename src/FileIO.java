@@ -33,10 +33,10 @@ public class FileIO {
 
 		return lastKey;
 	}
-	public Map<String, String> ReadFileSlang() {
+	public Map<String, String> ReadFileSlang(String path) {
 		Map <String, String> englSpan = new HashMap<String, String>();
 		try {
-		      File myObj = new File(pathSlangUsed);
+		      File myObj = new File(path);
 		      Scanner myReader = new Scanner(myObj);
 		      while (myReader.hasNextLine()) {
 		        String data = myReader.nextLine();
@@ -85,12 +85,51 @@ public class FileIO {
 			    	pw.println(historyDic.get(i));			    	
 			    }
 			    pw.close();
-			    System.out.println("Done!");
+			   
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
+	}
+	public void WriteDuplicateInFile(List<String> slangword, String path, String def) {
+
+		List<String> historyDic = new ArrayList<>();
+		FileWriter myWriter;
+		try {
+			
+			try {
+			     File myObj = new File(path);
+			     Scanner myReader = new Scanner(myObj);
+			     while (myReader.hasNextLine()) {
+			       String data = myReader.nextLine();
+			       historyDic.add(data);	        			        	
+			      }
+			      	myReader.close();
+			    } catch (FileNotFoundException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
+			
+			Dictionary dic = new Dictionary();
+			dic.InitialDictionary();
+			for(int i=0; i<slangword.size(); i++) {
+				String sw = slangword.get(i).toString().replaceAll("[\\[\\]\\(\\)]", "");
+				historyDic.add( sw + "`" + def);
+			}
+			
+			//Write File
+			myWriter = new FileWriter(path);
+			 PrintWriter pw = new PrintWriter(new FileOutputStream(path));
+			    for(int i=0; i<historyDic.size(); i++) {
+			    	pw.println(historyDic.get(i));			    	
+			    }
+			    pw.close();
+			    System.out.println("Done!");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	public void ReadFileHistory() {
 		List<String> historyDic = new ArrayList<>();
@@ -111,4 +150,33 @@ public class FileIO {
 		      e.printStackTrace();
 		    }
 	}
+	public void printToFile(String path, List<String> historyDic) {
+		FileWriter myWriter;
+		try {
+			myWriter = new FileWriter(path);
+			 PrintWriter pw = new PrintWriter(new FileOutputStream(path));
+		    for(int i=0; i<historyDic.size(); i++) {
+		    	pw.println(historyDic.get(i));			    	
+		    }
+		    pw.close();
+		    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	public void RemoveSlangWord(String path, String slangword) {
+		Dictionary dic = new Dictionary();
+		dic.setDic(this.ReadFileSlang(path));
+		
+		dic.getDic().remove(slangword);
+		List<String> listDic = new ArrayList<>();
+		dic.getDic().entrySet().forEach(entry -> {
+			listDic.add(entry.getKey()+"`"+entry.getValue());
+		});
+		this.printToFile("test.txt", listDic);
+		
+	}
+	
 }

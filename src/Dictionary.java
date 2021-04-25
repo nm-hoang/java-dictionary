@@ -1,7 +1,10 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -53,7 +56,7 @@ public class Dictionary {
 	
 	public void InitialDictionary() {
 		FileIO file = new FileIO();
-		dic = file.ReadFileSlang();
+		dic = file.ReadFileSlang(pathSlangUsed);
 	}
 	public void PrintDictionary() {
 		dic.entrySet().forEach(entry -> {
@@ -63,12 +66,6 @@ public class Dictionary {
 	
 	public List<String> ShowSlangWordByDefination(String def) {
 		List<String> sl = new ArrayList<>();
-//		dic.entrySet().forEach(entry -> {
-//		    if(entry.getValue().toLowerCase().contains(def.toLowerCase())) {
-//		    	sl.add(entry.getKey());
-//		    }
-//		    
-//		});
 		for (Map.Entry<String, String> entry : dic.entrySet()) {
 			if(entry.getValue().toLowerCase().contains(def.toLowerCase())) {
 				sl.add(entry.getKey());
@@ -84,6 +81,7 @@ public class Dictionary {
 	}
 	
 	public void AddSlangWord(){
+		FileIO file = new FileIO();
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Enter a slang word: ");
 		List<String> sl = new ArrayList<>();
@@ -94,18 +92,18 @@ public class Dictionary {
 			String choose = scanner.nextLine();
 			switch(choose) {
 				case "o":{
+					file.RemoveSlangWord(pathSlangUsed, sl.get(0));
 					System.out.print("defination: ");
 					String def = scanner.nextLine();
-					FileIO file = new FileIO();
-					file.WriteFile(sl, pathSlangOriginal);
+					file.WriteDuplicateInFile(sl, pathSlangUsed, def);
 					break;
 				}
 				case "d":{
+					file.RemoveSlangWord("test.txt", sl.get(0));
 					System.out.print("defination: ");
 					String def = scanner.nextLine();
-					String duplicate = result.concat(def);
-					FileIO file = new FileIO();
-//					file.WriteFile(sl, pathSlangOriginal, duplicate);
+					String duplicate = result + " | " + def;
+					file.WriteDuplicateInFile(sl, pathSlangUsed, duplicate);
 					break;
 				}
 				case "c":{
@@ -116,10 +114,70 @@ public class Dictionary {
 		else {
 			System.out.print("defination: ");
 			String def = scanner.nextLine();
-			FileIO file = new FileIO();
-//			file.WriteFile(sl, , def);
+			file.WriteDuplicateInFile(sl,pathSlangUsed , def);
 		}
 	}
-	
-	
+	public void EditSlangWord() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter slangword: ");
+		String sl = scanner.nextLine().toUpperCase();
+		if(dic.get(sl.toUpperCase()) != null) {
+			System.out.print("Defination: ");
+			String def = scanner.nextLine();
+			dic.put(sl, def);
+			FileIO file = new FileIO();
+			file.printToFile(pathSlangUsed, ConvertToList(this));
+		}
+		else {
+			System.out.print("Slang word not found !");
+		}
+		
+	}
+	public List<String> ConvertToList(Dictionary dic){
+		List<String> listDic = new ArrayList<>();
+		dic.getDic().entrySet().forEach(entry -> {
+			listDic.add(entry.getKey()+"`"+entry.getValue());
+		});
+		return listDic;
+	}
+	public void DeleteSlangWord() {
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter a slang word you want to delete: ");
+		String sl = scanner.nextLine().toUpperCase();
+		if(dic.get(sl) != null) {
+			dic.remove(sl);
+			FileIO file = new FileIO();
+			file.printToFile(pathSlangUsed, ConvertToList(this));
+			System.out.print("Delete done!");
+		}
+		else{
+			System.out.print("Slang word is not exist");
+		}
+	}
+	public void ResetOgSlangWord() {
+		FileIO file = new FileIO();
+		dic = file.ReadFileSlang(pathSlangOriginal);
+		file.printToFile(pathSlangUsed, ConvertToList(this));
+		System.out.print("done");
+	}
+	public String RandomSlangWord() {
+		String[] sl = new String[2];
+		Random generator = new Random();
+		Object[] values = dic.keySet().toArray();
+		Object randomValue = values[generator.nextInt(values.length)];
+		return randomValue.toString();
+	}
+	public void ShowRandomSlangWord() {
+		String random = this.RandomSlangWord();
+		System.out.println("Random: " + random + "\nDefination: " + dic.get(random));
+	}
+	public void ChooseRightDef() {
+		String randowSl = this.RandomSlangWord();
+		String rightAnswer = dic.get(randowSl);
+		ArrayList<String> def = new ArrayList<>();
+		while(def.size() < 4){
+			
+		}
+	}
 }

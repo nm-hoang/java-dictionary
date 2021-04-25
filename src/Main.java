@@ -12,6 +12,7 @@ public class Main {
 		dic.InitialDictionary();
 		Scanner scanner = new Scanner(System.in);
 		while(true) {
+			dic.InitialDictionary();
 			System.out.println("\n\n1: Find word in slang word");
 			System.out.println("2: Find slang word by defination, show another slang word that contain keyword.");
 			System.out.println("3: Show history, list slang word was searched");
@@ -46,8 +47,32 @@ public class Main {
 					dic.AddSlangWord();
 					break;
 				}
-				case "0":{
+				case "5":{
+					dic.EditSlangWord();
+					break;
+					
+				}
+				case "6":{
+					dic.DeleteSlangWord();
+					break;
+				}
+				case "7":{
+					dic.ResetOgSlangWord();
+					break;
+				}
+				case "8":{
+					dic.ShowRandomSlangWord();
+					break;
+				}
+				case "0": {
+					break;
+				}
+				case "z":{
 					dic.PrintDictionary();
+					break;
+				}
+				default:{
+					System.out.println("Invalid!!!");
 					break;
 				}
 			}
