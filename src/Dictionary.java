@@ -182,7 +182,7 @@ public class Dictionary {
 				listSl.add(random);
 			}
 		}
-		System.out.println("Slang word: " + SlQuestion + "def: "+dic.get(SlQuestion));
+		System.out.println("Slang word: " + SlQuestion);
 		Collections.shuffle(listSl);
 		System.out.println("A. " + dic.get(listSl.get(0)));
 		System.out.println("B. " + dic.get(listSl.get(1)));
@@ -201,5 +201,34 @@ public class Dictionary {
 			System.out.println("Wrong answer! The correct answer is " + rightAnswer);
 		}
 	
+	}
+	public void ChooseRightSlangWord() {
+		String SlQuestion = this.RandomSlangWord();
+		ArrayList<String> listSl = new ArrayList<>();
+		listSl.add(SlQuestion);
+		while(listSl.size() < 4){
+			String random = this.RandomSlangWord();
+			if(random != SlQuestion) {
+				listSl.add(random);
+			}
+		}
+		System.out.println("defination: "+dic.get(SlQuestion));
+		Collections.shuffle(listSl);
+		System.out.println("A. " + listSl.get(0));
+		System.out.println("B. " + listSl.get(1));
+		System.out.println("C. " + listSl.get(2));
+		System.out.println("D. " + listSl.get(3));
+		
+		char rightAnswer = (char)(65+listSl.indexOf(SlQuestion));
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Your answer: ");
+		String chooseAnswer = scanner.nextLine().toUpperCase();
+		
+		if(chooseAnswer.charAt(0) == rightAnswer ) {
+			System.out.println("Correct answer!");
+		}
+		else {
+			System.out.println("Wrong answer! The correct answer is " + rightAnswer);
+		}
 	}
 }

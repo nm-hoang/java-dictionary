@@ -68,6 +68,10 @@ public class Main {
 					dic.ChooseRightDef();
 					break;
 				}
+				case "10":{
+					dic.ChooseRightSlangWord();
+					break;
+				}
 				case "0": {
 					break;
 				}
