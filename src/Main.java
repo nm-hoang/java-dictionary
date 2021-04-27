@@ -6,8 +6,6 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Dictionary dic = new Dictionary();
-		Dictionary history = new Dictionary();
-		
 		FileIO file = new FileIO();
 		dic.InitialDictionary();
 		Scanner scanner = new Scanner(System.in);
@@ -75,10 +73,7 @@ public class Main {
 				case "0": {
 					break;
 				}
-				case "z":{
-					dic.PrintDictionary();
-					break;
-				}
+				
 				default:{
 					System.out.println("Invalid!!!");
 					break;
