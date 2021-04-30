@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Dictionary dic = new Dictionary();
@@ -23,18 +23,27 @@ public class Main {
 			System.out.println("10: Show 1 randow defination. User pick 1 in 4 option of slang words");
 			System.out.print("Choose: ");
 			String line = scanner.nextLine();
+			
 			switch(line) {
 				case "1":{
 					System.out.print("Enter a slang word: ");
 					String word = scanner.nextLine();
 					System.out.print("Defination: ");
+					long startTime = System.currentTimeMillis();
 					System.out.println(dic.ShowDefinationBySlangWord(word));
+					long endTime = System.currentTimeMillis();
+					long timeElapsed = endTime - startTime;
+					System.out.println("Time in millisecond: " + timeElapsed );
 					break;
 				}
 				case "2": {
 					System.out.print("Enter a defination: ");
 					String word = scanner.nextLine();
+					long startTime = System.currentTimeMillis();
 					dic.printListSlangWord(dic.ShowSlangWordByDefination(word));
+					long endTime = System.currentTimeMillis();
+					long timeElapsed = endTime - startTime;
+					System.out.println("Time in millisecond: " + timeElapsed );
 					break;
 				}
 				case "3":{
@@ -78,7 +87,9 @@ public class Main {
 					System.out.println("Invalid!!!");
 					break;
 				}
+				
 			}
+			
 		}
 	}
 

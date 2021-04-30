@@ -1,3 +1,10 @@
 DUO`huy guon
 AFF`Affirmative
 #1`Number one
+DFF`Don't Forget to Flush
+AFF`Affirmative
+$`Dollar| money
+$`Dollar| money
+$`Dollar| money
+#1`Number one
+$`Dollar| money
